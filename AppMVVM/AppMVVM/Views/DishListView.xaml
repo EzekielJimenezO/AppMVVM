@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMVVM.Views.DishListView">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cargar" Command="{Binding LoadCommand}"/>
+        <ToolbarItem Text="Nuevo" Command="{Binding NewCommand}"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Label
+                Text="Platillos WOW"
+                FontSize="Large"
+                HorizontalOptions="CenterAndExpand"/>
+            <CollectionView
+                x:Name="DishesList"
+                ItemsSource="{Binding ListDishes}"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedDish}"
+                SelectionChangedCommand="{Binding SelectedCommand}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image
+                                Grid.RowSpan="3"
+                                HeightRequest="50"
+                                Source="{Binding Picture}" />
+                            <Label
+                                Grid.Column="2"
+                                Grid.Row="1"
+                                FontAttributes="Bold"
+                                Text="{Binding Name}" />
+                            <Label
+                                Grid.Column="2"
+                                Grid.Row="2"
+                                Text="{Binding Category}" />
+                            <Label
+                                Grid.Column="2"
+                                Grid.Row="3"
+                                Text="{Binding Price, StringFormat='${0:F2}'}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
